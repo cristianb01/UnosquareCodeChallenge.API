@@ -6,7 +6,7 @@ using UnosquareCodeChallenge.Domain.Entities;
 
 namespace UnosquareCodeChallenge.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tasks")]
     [ApiController]
     public class UnosquareTaskController(IUnosquareTaskService taskService) : ControllerBase
     {
@@ -20,6 +20,20 @@ namespace UnosquareCodeChallenge.Api.Controllers
         public async Task<IActionResult> Create([FromBody] UnosquareTask task, CancellationToken cancellationToken)
         {
             return Ok(await taskService.CreateTask(task, cancellationToken));
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UnosquareTask task, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var updatedTask = await taskService.UpdateTask(id, task, cancellationToken);
+                return Ok(updatedTask);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpDelete("{id:int}")]

@@ -13,7 +13,7 @@ namespace UnosquareCodeChallege.Persistence.Repositories
     {
         public Task<UnosquareTask?> GetTaskById(int id, CancellationToken cancellationToken)
         {
-            return context.Tasks.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return context.Tasks.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public Task<List<UnosquareTask>> ListTasks(CancellationToken cancellationToken, bool? isCompleted = null)
@@ -33,6 +33,13 @@ namespace UnosquareCodeChallege.Persistence.Repositories
             var createdTask = (await context.Tasks.AddAsync(task, cancellationToken)).Entity;
             await context.SaveChangesAsync(cancellationToken);
             return createdTask;
+        }
+
+        public async Task<UnosquareTask> Update(UnosquareTask task, CancellationToken cancellationToken)
+        {
+            var updatedTask = context.Tasks.Update(task).Entity;
+            await context.SaveChangesAsync(cancellationToken);
+            return updatedTask;
         }
 
         public Task Delete(UnosquareTask task, CancellationToken cancellationToken)

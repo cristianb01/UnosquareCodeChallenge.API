@@ -14,6 +14,7 @@ namespace UnosquareCodeChallenge.Application.Interfaces
         
         Task<UnosquareTask> Create(UnosquareTask task, CancellationToken cancellationToken);
 
+        Task<UnosquareTask> Update(UnosquareTask task, CancellationToken cancellationToken);
         Task Delete(UnosquareTask task, CancellationToken cancellationToken);
     }
 }

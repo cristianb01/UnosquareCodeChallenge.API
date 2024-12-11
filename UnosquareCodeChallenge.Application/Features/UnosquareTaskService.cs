@@ -31,5 +31,16 @@ namespace UnosquareCodeChallenge.Application.Features
         {
             return repository.Create(task, cancellationToken);
         }
+
+        public async Task<UnosquareTask> UpdateTask(int id, UnosquareTask task, CancellationToken cancellationToken)
+        {
+            var existingTask = await repository.GetTaskById(id, cancellationToken);
+
+            if (existingTask is null)
+            {
+                throw new NotFoundException("Task does not exist");
+            }
+            return await repository.Update(task, cancellationToken);
+        }
     }
 }
