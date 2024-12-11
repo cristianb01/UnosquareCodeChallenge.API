@@ -1,4 +1,4 @@
-namespace UnosquareCodeChallenge
+namespace UnosquareCodeChallenge.Api
 {
     public class WeatherForecast
     {

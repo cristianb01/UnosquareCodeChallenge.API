@@ -2,16 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using UnosquareCodeChallenge.Application.Features;
 
-namespace UnosquareCodeChallenge.Controllers
+namespace UnosquareCodeChallenge.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UnosquareTaskController(IUnosquareTaskService taskService) : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetAll([FromQuery] bool isCompleted, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll([FromQuery] bool isCompleted, CancellationToken cancellationToken)
         {
-            return Ok(taskService.GetAll(cancellationToken));
+            return Ok(await taskService.GetAll(cancellationToken));
         }
     }
 }

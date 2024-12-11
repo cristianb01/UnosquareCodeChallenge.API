@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnosquareCodeChallenge", "UnosquareCodeChallenge\UnosquareCodeChallenge.csproj", "{CCA4E52E-E24E-46D2-9A75-90D536FB89B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnosquareCodeChallenge.Api", "UnosquareCodeChallenge.Api\UnosquareCodeChallenge.Api.csproj", "{CCA4E52E-E24E-46D2-9A75-90D536FB89B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnosquareCodeChallenge.Domain", "UnosquareCodeChallenge.Domain\UnosquareCodeChallenge.Domain.csproj", "{A97DC93C-9116-4FC9-991E-09DA9D3D682F}"
 EndProject
