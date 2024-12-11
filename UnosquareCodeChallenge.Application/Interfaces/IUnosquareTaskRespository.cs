@@ -9,6 +9,8 @@ namespace UnosquareCodeChallenge.Application.Interfaces
 {
     public interface IUnosquareTaskRespository
     {
-        Task<List<UnosquareTask>> ListTasks(CancellationToken cancellationToken);
+        Task<List<UnosquareTask>> ListTasks(CancellationToken cancellationToken, bool? isCompleted = null);
+        
+        Task<UnosquareTask> Create(UnosquareTask task, CancellationToken cancellationToken);
     }
 }

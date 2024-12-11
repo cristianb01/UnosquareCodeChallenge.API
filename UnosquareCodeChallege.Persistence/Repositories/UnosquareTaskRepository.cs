@@ -11,9 +11,23 @@ namespace UnosquareCodeChallege.Persistence.Repositories
 {
     public class UnosquareTaskRepository(AppDbContext context) : IUnosquareTaskRespository
     {
-        public Task<List<UnosquareTask>> ListTasks(CancellationToken cancellationToken)
+        public Task<List<UnosquareTask>> ListTasks(CancellationToken cancellationToken, bool? isCompleted = null)
         {
-            return context.Tasks.ToListAsync(cancellationToken);
+            if (isCompleted == null)
+            {
+                return context.Tasks.AsNoTracking().ToListAsync(cancellationToken);
+            }
+            else
+            {
+                return context.Tasks.AsNoTracking().Where(task => task.IsCompleted == isCompleted).ToListAsync(cancellationToken);
+            }
+        }
+
+        public async Task<UnosquareTask> Create(UnosquareTask task, CancellationToken cancellationToken)
+        {
+            var createdTask = (await context.Tasks.AddAsync(task, cancellationToken)).Entity;
+            await context.SaveChangesAsync(cancellationToken);
+            return createdTask;
         }
     }
 }

@@ -14,6 +14,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var myAllowSpecificOrigins = "MyAllowedHosts";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(myAllowSpecificOrigins, policy =>
+    {
+        policy.AllowAnyHeader()
+            .AllowAnyOrigin()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("UnosquareDatabase"));
@@ -35,6 +47,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(myAllowSpecificOrigins);
 
 app.MapControllers();
 
