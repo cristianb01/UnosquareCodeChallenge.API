@@ -6,5 +6,6 @@ namespace UnosquareCodeChallenge.Application.Features
     {
         Task<List<UnosquareTask>> GetAll(CancellationToken cancellationToken, bool? isCompleted = null);
         Task<UnosquareTask> CreateTask(UnosquareTask task, CancellationToken cancellationToken);
+        Task DeleteTask(int id, CancellationToken cancellationToken);
     }
 }

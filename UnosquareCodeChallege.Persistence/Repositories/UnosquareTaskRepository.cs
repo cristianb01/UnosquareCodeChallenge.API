@@ -11,6 +11,11 @@ namespace UnosquareCodeChallege.Persistence.Repositories
 {
     public class UnosquareTaskRepository(AppDbContext context) : IUnosquareTaskRespository
     {
+        public Task<UnosquareTask?> GetTaskById(int id, CancellationToken cancellationToken)
+        {
+            return context.Tasks.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
         public Task<List<UnosquareTask>> ListTasks(CancellationToken cancellationToken, bool? isCompleted = null)
         {
             if (isCompleted == null)
@@ -28,6 +33,12 @@ namespace UnosquareCodeChallege.Persistence.Repositories
             var createdTask = (await context.Tasks.AddAsync(task, cancellationToken)).Entity;
             await context.SaveChangesAsync(cancellationToken);
             return createdTask;
+        }
+
+        public Task Delete(UnosquareTask task, CancellationToken cancellationToken)
+        {
+            context.Tasks.Remove(task);
+            return context.SaveChangesAsync(cancellationToken);
         }
     }
 }
